@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { firestore } from '../../firebase';
+import { getAuth,createUserWithEmailAndPassword  } from 'firebase/auth';
 import Navbar2 from './Navbar2';
+import './MyOrderPage.css';
 
 const MyOrderPage = () => {
   const [orders, setOrders] = useState([]);
@@ -22,25 +23,38 @@ const MyOrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+  
+        if (!user) {
+          console.error('User is not logged in.');
+          return;
+        }
+  
+        const userId = user.uid;
+  
         const querySnapshot = await getDocs(collection(firestore, 'orders'));
         const fetchedOrders = [];
         querySnapshot.forEach((doc) => {
-          fetchedOrders.push({ id: doc.id, ...doc.data() });
+          const orderData = doc.data();
+          if (orderData.userId === userId) {
+            fetchedOrders.push({ id: doc.id, ...orderData });
+          }
         });
         setOrders(fetchedOrders);
       } catch (error) {
         console.error('Error fetching orders: ', error);
       }
     };
-
+  
     fetchOrders();
   }, []);
 
   return (
     <div>
       <Navbar2 />
-      <h1>My Orders</h1>
-      <table>
+      <h1 className="page-title">My Orders</h1>
+      <table className="order-table">
         <thead>
           <tr>
             <th>Order ID</th>
@@ -56,9 +70,7 @@ const MyOrderPage = () => {
               <td>{order.toolName}</td>
               <td>{order.phoneNumber}</td>
               <td>
-                <button onClick={() => handleCancel(order.id)}>Cancel</button>
-                {' | '}
-                <Link to={`/feedback`}>Feedback</Link>
+                <button className="cancel-btn" onClick={() => handleCancel(order.id)}>Cancel</button>
               </td>
             </tr>
           ))}

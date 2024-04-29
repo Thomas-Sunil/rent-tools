@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import Navbar2 from './Navbar2';
-import { collection, addDoc } from 'firebase/firestore'; // Import Firestore functions for adding documents
-import { firestore } from '../../firebase'; // Import your Firestore instance
+import { collection, addDoc } from 'firebase/firestore';
+import { firestore } from '../../firebase';
+import { getAuth,createUserWithEmailAndPassword  } from 'firebase/auth';
 
-const OrderPage = () => {
+
+
+const OrderPage = ({ selectedTool, price }) => {
   const [timeSlot, setTimeSlot] = useState(1);
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [labourNeeded, setLabourNeeded] = useState(false);
 
-  const calculateAmount = () => {
-    const rate = 20;
-    return rate * timeSlot;
-  };
+  const  name =  selectedTool;
+  console.log(name)
+  const rent = price;
 
   const handleTimeSlotChange = (e) => {
     setTimeSlot(parseInt(e.target.value));
@@ -20,22 +22,35 @@ const OrderPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
+      // Get the current user
+      const auth = getAuth();
+      const user = auth.currentUser;
+  
+      if (!user) {
+        // User is not logged in, handle this case accordingly
+        console.error('User is not logged in.');
+        return;
+      }
+  
+      const userId = user.uid;
+  
       const orderData = {
-        date: new Date().toISOString(), // Assuming current date for simplicity
+        userId: userId, // Include the user ID in the order data
+        date: new Date().toISOString(),
         timeSlot: timeSlot,
         address: address,
         phoneNumber: phoneNumber,
         labourNeeded: labourNeeded,
-        amount: calculateAmount()
+        amount: rent * timeSlot // Calculate total amount based on tool rate per day and time slot
       };
-
-      // Add the order to the Firestore collection
+  
+      // Submit orderData to Firestore
       const docRef = await addDoc(collection(firestore, 'orders'), orderData);
       console.log('Order placed with ID: ', docRef.id);
-
-      // Reset the form fields
+  
+      // Reset form fields
       setTimeSlot(1);
       setAddress('');
       setPhoneNumber('');
@@ -44,6 +59,7 @@ const OrderPage = () => {
       console.error('Error adding order: ', error);
     }
   };
+  
 
   return (
     <>
@@ -52,13 +68,13 @@ const OrderPage = () => {
         <h1 className="order-heading">Place Your Order</h1>
         <form className="order-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="date">Date:</label>
-            <input type="date" id="date" name="date" className="input-field" />
+            <label htmlFor="tool">Tool Name:</label>
+            <input type="text" id="tool" name="tool" className="input-field" value={name}/>
           </div>
 
           <div className="form-group">
             <label htmlFor="time">Time Slot:</label>
-            <select id="time" name="time" className="input-field" onChange={handleTimeSlotChange}>
+            <select id="time" name="time" value={timeSlot} onChange={handleTimeSlotChange}>
               <option value="1">1 Day</option>
               <option value="2">2 Days</option>
               <option value="3">3 Days</option>
@@ -83,7 +99,7 @@ const OrderPage = () => {
 
           <div className="form-group">
             <label htmlFor="amount">Rental Amount:</label>
-            <input type="text" id="amount" name="amount" className="input-field" value={`$${calculateAmount()}`} readOnly />
+            <input type="text" id="amount" name="amount" className="input-field"  />
           </div>
 
           <button className="submit-btn" type="submit">Confirm Order</button>

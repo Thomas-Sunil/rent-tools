@@ -62,6 +62,8 @@
   width: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  max-height: 200px; /* Limiting the height of the image */
+  object-fit: contain; /* Ensure the image covers the entire container */
 }
 
 .tool-card2 .tool-details2 {

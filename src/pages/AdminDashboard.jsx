@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './AdminDashboard.css';
-import { firestore, collection, getDocs, deleteDoc, doc } from '../../firebase';
+import { addTool, firestore, collection, getDocs, deleteDoc, doc } from '../../firebase';
 
 const AdminDashboard = () => {
+  const [newToolName, setNewToolName] = useState('');
+  const [newToolDescription, setNewToolDescription] = useState('');
+  const [newToolRatePerDay, setNewToolRatePerDay] = useState('');
+  const [newToolImage, setNewToolImage] = useState('');
   const [tools, setTools] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -46,6 +50,30 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleAddToolFormSubmit = async (event) => {
+    event.preventDefault();
+    const newToolData = {
+      name: newToolName,
+      description: newToolDescription,
+      ratePerDay: newToolRatePerDay,
+      image: newToolImage
+    };
+    try {
+      await addTool(newToolData);
+      fetchTools();
+      clearFormFields();
+    } catch (error) {
+      console.error('Error adding tool:', error);
+    }
+  };
+
+  const clearFormFields = () => {
+    setNewToolName('');
+    setNewToolDescription('');
+    setNewToolRatePerDay('');
+    setNewToolImage('');
+  };
+
   const handleDeleteTool = async (toolId) => {
     try {
       await deleteDoc(doc(firestore, 'tools', toolId));
@@ -72,6 +100,13 @@ const AdminDashboard = () => {
             </div>
           ))}
         </div>
+        <form onSubmit={handleAddToolFormSubmit} className="add-tool-box">
+          <input type="text" placeholder="Tool Name" value={newToolName} onChange={(e) => setNewToolName(e.target.value)} className="input-box" />
+          <input type="text" placeholder="Description" value={newToolDescription} onChange={(e) => setNewToolDescription(e.target.value)} className="input-box" />
+          <input type="number" placeholder="Rate Per Day" value={newToolRatePerDay} onChange={(e) => setNewToolRatePerDay(e.target.value)} className="input-box" />
+          <input type="text" placeholder="Image URL" value={newToolImage} onChange={(e) => setNewToolImage(e.target.value)} className="input-box" />
+          <button type="submit" className="add-button">Add Tool</button>
+        </form>
       </div>
 
       {/* Feedback list */}
@@ -126,4 +161,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-

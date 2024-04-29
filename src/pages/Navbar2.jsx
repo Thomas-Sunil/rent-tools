@@ -1,8 +1,8 @@
+// Navbar2.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar2.css';
 import logo from './downloadfile-1-removebg.png'; // Import the logo image
-
 
 const Navbar2 = () => {
   // Function to handle logout
@@ -19,6 +19,7 @@ const Navbar2 = () => {
         <h1>Power Tool Rental</h1>
       </div>
       <div className="nav-links">
+        <Link to="/feedback" className="nav-link">Feedback</Link>
         <Link to="/services" className="nav-link">Available Tools</Link>
         <Link to="/myorders" className="nav-link">My Orders</Link>
         <button onClick={handleLogout} className="nav-link">Logout</button> {/* Use a button for logout */}

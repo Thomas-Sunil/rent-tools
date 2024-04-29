@@ -10,6 +10,7 @@ const FeedbackForm = () => {
   const [toolName, setToolName] = useState('');
   const [rating, setRating] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false); // State for feedback submitted pop-up
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ const FeedbackForm = () => {
         feedback,
       });
       console.log('Feedback submitted successfully with ID: ', docRef.id);
-      // Optionally, you can redirect the user or show a success message
+      setFeedbackSubmitted(true); // Set feedback submitted state to true
     } catch (error) {
       console.error('Error submitting feedback:', error);
     }
@@ -80,9 +81,13 @@ const FeedbackForm = () => {
 
         <button type="submit">Submit Feedback</button>
       </form>
+      {feedbackSubmitted && ( // Conditional rendering of feedback submitted pop-up
+        <div className="feedback-popup">
+          <p>Your feedback has been submitted</p>
+        </div>
+      )}
     </div>
   );
 };
 
 export default FeedbackForm;
-
