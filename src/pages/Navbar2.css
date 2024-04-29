@@ -1,0 +1,144 @@
+/* Navbar2.css */
+
+
+.navbar2 {
+  background-color: teal;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fix the navbar to the top */
+  top: 0; /* Align the navbar to the top of the viewport */
+  width: 100%; /* Make the navbar span the full width */
+  z-index: 1000; /* Ensure the navbar appears above other content */
+}
+
+.navbar2 .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar2 .logo img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.navbar2 .logo h1 {
+  margin: 0;
+  color: #fff;
+}
+
+.navbar2 .nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar2 .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: all 0.3s ease;
+}
+
+.navbar2 .nav-links a:hover {
+  text-decoration: underline;
+  color: #f0f0f0;
+}
+
+/* Content styles */
+/* Content styles */
+.navbar2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: teal; /* Teal */
+  color: #fff; /* White */
+  padding: 15px 25px; /* Increased padding */
+  width: 98%;
+  max-height: 50px; 
+} 
+
+.logo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.logo img {
+  width: 50px; /* Increased width */
+  height: 50px; /* Increased height */
+  margin-right: 10px;
+}
+
+.navbar2 .logo h1 {
+  font-size: large;  
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 30px; /* Increased margin */
+  font-size: 1.2rem; /* Increased font size */
+  margin-left: 120px; /* Increased margin */
+}
+
+.search-bar input {
+  width: 200px;
+  height: 40px;
+  border-radius: 40px; /* Increased border radius */
+  border: none;
+  font-size: 1.2rem; /* Increased font size */
+  padding-left: 10px;
+}
+
+.right-links {
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  margin-right: 30px; /* Increased margin */
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 25px; /* Increased padding */
+  font-size: 1.2rem; /* Increased font size */
+  border: none;
+  cursor: pointer;
+  border-radius: 25px; /* Increased border radius */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px; /* Increased min width */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 15px 20px; /* Increased padding */
+  text-decoration: none;
+  display: block;
+  font-size: 1.2rem; /* Increased font size */
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

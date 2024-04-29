@@ -1,0 +1,51 @@
+.signup-form {
+    max-width: 400px; /* Increase the maximum width */
+    margin: 50px auto; /* Center the form horizontally and add vertical margin */
+    padding: 20px;
+    border-radius: 8px; /* Add some border radius */
+    background-color: #fff; /* White background */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+    margin-left: 600px;
+  }
+  
+  .signup-form h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Add some space below the heading */
+    color: #333; /* Dark gray color */
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Add some space between form groups */
+    margin-right: 15px ;
+    
+  }
+  
+  .form-group label {
+    font-weight: bold; /* Make labels bold */
+    display: block; /* Display labels as block elements */
+    margin-bottom: 5px; /* Add some space below labels */
+  }
+  
+  .form-group input {
+    width: 100%; /* Make input fields full width */
+    padding: 10px; /* Keep padding for input fields */
+    border: 1px solid #ccc; /* Add a border to input fields */
+    border-radius: 5px; /* Add some border radius */
+  }
+  
+  button[type="submit"] {
+    width: 100%; /* Make the submit button full width */
+    padding: 12px; /* Keep padding for button */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add some border radius */
+    background-color: teal; /* Teal background */
+    color: #fff; /* White text color */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #008080; /* Darker shade of teal on hover */
+  }
+  

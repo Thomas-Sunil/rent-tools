@@ -1,0 +1,87 @@
+/* Homesty.css */
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Light gray */
+    color: #333; /* Dark gray */
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #008080; /* Teal */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #f2f2f2; /* Light gray */
+  }
+  
+  .nav-links {
+    display: flex;
+  }
+  
+  /* Container styles */
+  .container {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 120px auto 20px; /* Adjust margin to make space for the fixed navbar */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    flex-wrap: wrap; /* Allow items to wrap */
+  }
+  
+  /* Description styles */
+  .description {
+    width: 45%; /* Adjust as needed */
+  }
+  
+  .description h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333; /* Dark gray */
+  }
+  
+  .description p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  /* Button container styles */
+  .button-container {
+    display: flex;
+    flex-direction: column; /* Arrange buttons vertically */
+    align-items: flex-start; /* Align buttons to the start */
+  }
+  
+  /* Button styles */
+  .button {
+    padding: 10px 20px; /* Adjusted padding */
+    margin-top: 10px; /* Add margin between buttons */
+    background-color: transparent;
+    color: #008080; /* Teal */
+    border: 2px solid #008080; /* Teal */
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #008080; /* Teal on hover */
+    color: #f2f2f2; /* Light gray on hover */
+  }
+  
